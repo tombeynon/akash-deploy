@@ -1,0 +1,6 @@
+<% if @akash.wallet.exists? %>
+  <%= render "wallet", wallet: @akash.wallet %>
+<% else %>
+  <p>No wallet found.</p>
+<% end %>
+<p><%= link_to 'Create new', [:new, :wallet] %></p>

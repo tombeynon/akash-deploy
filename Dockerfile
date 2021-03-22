@@ -6,6 +6,14 @@ RUN \
   gem install bundler -v '2.2.15'
 ENV BUNDLER_VERSION 2.2.15
 
+ENV AKASH_NET=mainnet
+ENV AKASH_VERSION=latest
+ENV AKASH_HOME=./akash
+ENV KEY_NAME=deploy
+
+# Install Akash
+WORKDIR /usr
+RUN curl https://raw.githubusercontent.com/ovrclk/akash/master/godownloader.sh | sh -s -- "$AKASH_VERSION"
 
 # Install app
 WORKDIR /app

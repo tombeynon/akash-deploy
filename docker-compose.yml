@@ -4,7 +4,6 @@ services:
     build: .
     volumes:
       - .:/app
-      - $AKASH_HOME:/root/akash
     ports:
       - "3000:3000"
     env_file:

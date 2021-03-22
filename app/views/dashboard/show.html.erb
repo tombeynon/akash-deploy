@@ -1,0 +1,10 @@
+<p>
+  Version: <%= @akash.cli.version %><br />
+  Node: <%= @akash.cli.rpc_node %><br />
+  Latest Block: <%= @block_height %> (<%= @block_time %>)
+</p>
+<% if @akash.wallet.exists? %>
+  <%= render "wallet", wallet: @akash.wallet %>
+<% else %>
+  <p>No wallet found. <%= link_to 'Create new', [:new, :wallet] %></p>
+<% end %>

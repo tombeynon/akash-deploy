@@ -1,0 +1,7 @@
+<p>Address: <%= wallet.address %></p>
+<p>
+  Balance:
+  <% wallet.balances.each do |balance| %>
+    <%= balance['amount'] + balance ['denom'] %><br />
+  <% end %>
+</p>

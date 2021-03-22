@@ -1,0 +1,14 @@
+<% if @akash.wallet.exists? %>
+  <p><strong>Wallet already exists!</strong></p>
+<% end %>
+<p>Are you sure you want to create a new wallet?</p>
+
+<%= form_for :wallet, url: wallet_path do |f| %>
+  <%= f.label :recovery_phrase, 'Recovery phrase (to restore)' %><br />
+  <%= f.text_area :recovery_phrase %><br />
+  <% if @akash.wallet.exists? %>
+    <%= f.submit 'Create', data: {confirm: 'Your existing wallet will be lost. Are you sure?'} %>
+  <% else %>
+    <%= f.submit 'Create' %>
+  <% end %>
+<% end %>

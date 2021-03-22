@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AkashDeploy</title>
+    <title>Akash Deploy UI</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <h1>Akash Deploy UI</h1>
+    <p><%= link_to 'Home', root_path %> | <%= link_to 'Wallet', wallet_path %></p>
     <%= yield %>
   </body>
 </html>
