@@ -1,0 +1,40 @@
+<h1 class="display-4 mb-4">
+  <%= link_to "Deployment ##{@deployment.dseq}", deployment_path(@deployment.dseq), class: 'text-reset' %>
+  > Lease <%= @lease.provider.truncate(20) %>
+</h1>
+<div class="row">
+  <div class="col">
+    <table class="table">
+      <tr>
+        <td>Provider</td>
+        <td><%= @lease.provider %></td>
+      </tr>
+      <tr>
+        <td>State</td>
+        <td><%= @lease.state %></td>
+      </tr>
+      <tr>
+        <td>Price</td>
+        <td><%= format_balance(@lease.price) %></td>
+      </tr>
+      <tr>
+        <td>Escrow rate</td>
+        <td><%= format_balance(@lease.escrow.rate) %></td>
+      </tr>
+      <tr>
+        <td>Escrow balance</td>
+        <td><%= format_balance(@lease.escrow.balance) %></td>
+      </tr>
+      <tr>
+        <td>Escrow withdrawn</td>
+        <td><%= format_balance(@lease.escrow.withdrawn) %></td>
+      </tr>
+    </table>
+    <p>
+      <%= link_to 'Back', deployment_leases_path(@deployment.dseq) %>
+    </p>
+  </div>
+  <div class="col">
+    <pre><%= JSON.pretty_generate(@lease.data) %></pre>
+  </div>
+</div>

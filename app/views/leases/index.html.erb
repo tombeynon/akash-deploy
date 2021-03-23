@@ -1,0 +1,29 @@
+<h1 class="display-4 mb-4">
+  <%= link_to "Deployment ##{@deployment.dseq}", deployment_path(@deployment.dseq), class: 'text-reset' %> > Leases
+</h1>
+
+<div class="row">
+  <div class="col">
+    <% if @leases.all.any? %>
+      <table class="table">
+        <tr>
+          <th>Provider</th>
+          <th>State</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+        <% @leases.all.each do |lease| %>
+          <tr>
+            <td><%= lease.provider %></td>
+            <td><%= lease.state %></td>
+            <td><%= "#{format_balance(lease.price)}" %></td>
+            <td><%= link_to 'View', deployment_lease_path(@deployment.dseq, lease.provider) %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p>No Leases</p>
+    <% end %>
+    <p><%= link_to 'Back', deployment_path(@deployment.dseq) %>
+  </div>
+</div>

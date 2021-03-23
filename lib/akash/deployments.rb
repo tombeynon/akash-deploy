@@ -8,16 +8,20 @@ module Akash
       @wallet = wallet
     end
 
-    def deployments
-      @deployments ||= (data['deployments'] || []).map do |deploy|
-        Deployment.new(deploy)
-      end
+    def find(id)
+      deployments.find { |d| d.dseq == id }
     end
-    alias_method :all, :deployments
 
     def active
       deployments.find_all { |d| d.active? }
     end
+
+    def deployments
+      @deployments ||= (data['deployments'] || []).reverse.map do |deploy|
+        Deployment.new(cli, wallet, deploy)
+      end
+    end
+    alias_method :all, :deployments
 
     def data
       return {} unless wallet.exists?

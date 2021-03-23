@@ -1,4 +1,4 @@
-<h1 class="display-4">Dashboard</h1>
+<h1 class="display-4 mb-4">Dashboard</h1>
 
 <div class="row">
   <div class="col">
@@ -27,13 +27,13 @@
                 <%= "#{format_balance(deployment.escrow.balance)}" %>
                 <%= "(#{format_balance(deployment.escrow.transferred)} spent)" %>
               </td>
-              <td><%= link_to 'View', '#' %></td>
+              <td><%= link_to 'View', deployment_path(deployment.dseq) %></td>
             </tr>
           <% end %>
         </table>
       <% else %>
         <p>No Deployments</p>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

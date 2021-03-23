@@ -1,0 +1,51 @@
+<h1 class="display-4 mb-4">Deployment #<%= @deployment.dseq %></h1>
+<div class="row">
+  <div class="col">
+    <table class="table">
+      <tr>
+        <td>DSEQ</td>
+        <td><%= @deployment.dseq %></td>
+      </tr>
+      <tr>
+        <td>State</td>
+        <td><%= @deployment.state %></td>
+      </tr>
+      <tr>
+        <td>Leases</td>
+        <td><%= link_to @deployment.leases.all.count, deployment_leases_path(@deployment.dseq) %></td>
+      </tr>
+      <tr>
+        <td>Escrow balance</td>
+        <td><%= format_balance(@deployment.escrow.balance) %></td>
+      </tr>
+      <tr>
+        <td>Escrow spend</td>
+        <td><%= format_balance(@deployment.escrow.transferred) %></td>
+      </tr>
+      <% @deployment.groups.each do |group| %>
+        <% group.resources.each do |resource| %>
+          <tr>
+            <td><%= "#{group.name} CPU" %></td>
+            <td><%= resource[:cpu] %></td>
+          </tr>
+          <tr>
+            <td><%= "#{group.name} Memory" %></td>
+            <td><%= resource[:memory] %></td>
+          </tr>
+          <tr>
+            <td><%= "#{group.name} Storage" %></td>
+            <td><%= resource[:storage] %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+    <p>
+      <%= link_to 'Back', deployments_path %> |
+      <%= link_to 'Update', edit_deployment_path(@deployment.dseq) %> |
+      <%= link_to 'Close', deployment_path(@deployment.dseq), method: :delete, data: {confirm: 'Are you sure you want to close this deployment?'} %>
+    </p>
+  </div>
+  <div class="col">
+    <pre><%= JSON.pretty_generate(@deployment.data) %></pre>
+  </div>
+</div>
