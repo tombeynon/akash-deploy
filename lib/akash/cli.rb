@@ -44,7 +44,7 @@ module Akash
 
     def build_command(command, home: false, keyring: false, node: false)
       parts = [command]
-      parts.push("--home #{home_directory}") if home || keyring
+      parts.push("--home #{home_directory}")
       parts.push("--keyring-backend test") if keyring # insecure backend
       parts.push("--node #{rpc_node}") if node
       parts.join(' ')

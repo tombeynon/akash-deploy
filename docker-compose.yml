@@ -4,7 +4,13 @@ services:
     build: .
     volumes:
       - .:/app
+      - bundle_cache:/usr/local/bundle:delegated
     ports:
       - "3000:3000"
     env_file:
       - '.env'
+
+
+volumes:
+  bundle_cache:
+    driver: local

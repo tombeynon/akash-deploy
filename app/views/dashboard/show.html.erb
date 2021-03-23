@@ -1,10 +1,39 @@
-<p>
-  Version: <%= @akash.cli.version %><br />
-  Node: <%= @akash.cli.rpc_node %><br />
-  Latest Block: <%= @block_height %> (<%= @block_time %>)
-</p>
-<% if @akash.wallet.exists? %>
-  <%= render "wallet", wallet: @akash.wallet %>
-<% else %>
-  <p>No wallet found. <%= link_to 'Create new', [:new, :wallet] %></p>
-<% end %>
+<h1 class="display-4">Dashboard</h1>
+
+<div class="row">
+  <div class="col">
+    <% if @akash.wallet.exists? %>
+      <%= render "wallet", wallet: @akash.wallet %>
+    <% else %>
+      <p>No wallet found. <%= link_to 'Create new', [:new, :wallet] %></p>
+    <% end %>
+  </div>
+  <% if @akash.wallet.exists? %>
+    <div class="col">
+      <h3>Active Deployments</h3>
+      <% if @deployments.any? %>
+        <table class="table">
+          <tr>
+            <th>DSEQ</th>
+            <th>State</th>
+            <th>Escrow</th>
+            <th></th>
+          </tr>
+          <% @deployments.each do |deployment| %>
+            <tr>
+              <td><%= deployment.dseq %></td>
+              <td><%= deployment.state %></td>
+              <td>
+                <%= "#{format_balance(deployment.escrow.balance)}" %>
+                <%= "(#{format_balance(deployment.escrow.transferred)} spent)" %>
+              </td>
+              <td><%= link_to 'View', '#' %></td>
+            </tr>
+          <% end %>
+        </table>
+      <% else %>
+        <p>No Deployments</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

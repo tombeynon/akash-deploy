@@ -1,14 +1,24 @@
-<% if @akash.wallet.exists? %>
-  <p><strong>Wallet already exists!</strong></p>
-<% end %>
-<p>Are you sure you want to create a new wallet?</p>
+<h1 class="display-4">New Wallet</h1>
+<div class="row">
+  <div class="col">
+    <p>Are you sure you want to create a new wallet?</p>
 
-<%= form_for :wallet, url: wallet_path do |f| %>
-  <%= f.label :recovery_phrase, 'Recovery phrase (to restore)' %><br />
-  <%= f.text_area :recovery_phrase %><br />
-  <% if @akash.wallet.exists? %>
-    <%= f.submit 'Create', data: {confirm: 'Your existing wallet will be lost. Are you sure?'} %>
-  <% else %>
-    <%= f.submit 'Create' %>
-  <% end %>
-<% end %>
+    <% if @akash.wallet.exists? %>
+      <p><strong>Wallet already exists and will be lost!</strong></p>
+    <% end %>
+
+    <%= form_for :wallet, url: wallet_path do |f| %>
+      <div class="form-group">
+        <%= f.label :recovery_phrase, 'Recovery phrase (to restore)' %><br />
+        <%= f.text_area :recovery_phrase, class: 'form-control' %><br />
+      </div>
+      <% if @akash.wallet.exists? %>
+        <%= f.submit 'Create', data: {confirm: 'Your existing wallet will be lost. Are you sure?'}, class: 'btn btn-primary' %>
+      <% else %>
+        <%= f.submit 'Create', class: 'btn btn-primary' %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col">
+  </div>
+</div>

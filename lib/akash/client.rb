@@ -12,6 +12,10 @@ module Akash
       @wallet ||= Wallet.new(cli, key_name)
     end
 
+    def deployments
+      @deployments ||= Deployments.new(cli, wallet)
+    end
+
     def cli
       @cli ||= CLI.new(network, home_directory)
     end
