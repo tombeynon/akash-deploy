@@ -46,6 +46,8 @@
     </p>
   </div>
   <div class="col">
+    <pre><%= @deployment.sdl_content %></pre>
+    <hr />
     <pre><%= JSON.pretty_generate(@deployment.data) %></pre>
   </div>
 </div>

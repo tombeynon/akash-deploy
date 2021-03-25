@@ -49,10 +49,10 @@ module Akash
     def build_command(command, home: false, keyring: false, node: false, fees: false)
       parts = [command]
       parts.push("--home #{home_directory}")
-      parts.push("--keyring-backend test") if keyring # insecure backend
+      parts.push("--keyring-backend test") if keyring || fees # insecure backend
       parts.push("--node #{rpc_node}") if node || fees
       parts.push("--chain-id #{chain_id}") if fees
-      parts.push("--fees #{fees == true ? Akash::FEE_RATE : fees}") if fees
+      parts.push("--fees #{fees == true ? Akash::FEE_RATE : fees} --gas=auto") if fees
       parts.join(' ')
     end
 

@@ -1,0 +1,10 @@
+<%= form_for :deployment, url: @deployment ? deployment_path(@deployment.dseq) : deployments_path, method: @deployment ? :patch : :post do |f| %>
+  <div class="form-group">
+    <%= f.label :sdl_content do %>
+      SDL Content (<%= link_to 'example', 'https://github.com/tombeynon/akash-hello-world/blob/master/deploy.yml' %>)
+    <% end %>
+    <%= f.text_area :sdl_content, class: 'form-control', rows: 20 %><br />
+  </div>
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  <%= link_to 'Back', @deployment ? deployment_path(@deployment.dseq) : deployments_path, class: 'btn' %>
+<% end %>
