@@ -1,24 +1,5 @@
-# README
+# Akash Deploy UI
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a super alpha version of a deploy UI for Akash. I've thrown this together in a few evenings but rather than polish it, I want to release it as soon as possible so people can start using Akash even if they aren't as comfortable with the command line.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I'll actually publish the docker images and update this README with screenshots and docs tomorrow. If anyone finds this repo in the meantime, docker-compose will get you the rest of the way if you want to explore..
