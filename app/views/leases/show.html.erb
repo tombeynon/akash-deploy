@@ -29,12 +29,24 @@
         <td>Escrow withdrawn</td>
         <td><%= format_balance(@lease.escrow.withdrawn) %></td>
       </tr>
+      <% if @lease.manifest_active? %>
+        <%= render "deployments/service_status", services: @lease.service_status %>
+      <% end %>
     </table>
     <p>
       <%= link_to 'Back', deployment_leases_path(@deployment.dseq) %>
+      <% unless @lease.closed? %>
+        <% if @deployment.manifest_exists? %>
+          | <%= link_to 'Send manifest', deployment_lease_path(@deployment.dseq, @lease.provider), method: :patch %>
+        <% end %>
+        | <%= link_to 'Close lease', deployment_lease_path(@deployment.dseq, @lease.provider), method: :delete, data: { confirm: 'Are you sure you want to close this lease?' } %>
+      <% end %>
     </p>
   </div>
   <div class="col">
+    <% if @lease.manifest_active? %>
+      <pre><%= JSON.pretty_generate(@lease.status_data) %></pre>
+    <% end %>
     <pre><%= JSON.pretty_generate(@lease.data) %></pre>
   </div>
 </div>

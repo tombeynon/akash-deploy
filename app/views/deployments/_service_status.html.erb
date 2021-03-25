@@ -1,0 +1,14 @@
+<% services.each do |service, status| %>
+  <tr>
+    <td><%= service %> status</td>
+    <td><%= "#{status['available']} / #{status['total']}" %></td>
+  </tr>
+  <tr>
+    <td><%= service %> URIs</td>
+    <td>
+      <% status['uris'].each do |uri| %>
+        <%= link_to uri, "http://#{uri}", target: :blank, class: 'small' %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

@@ -41,13 +41,13 @@ module Akash
 
     private
 
-    def create_deployment(sdl_path)
-      result = cli.run("akash tx deployment create #{sdl_path} -y --from #{wallet.key_name}", fees: true)
+    def create_deployment(manifest_path)
+      result = cli.run("akash tx deployment create #{manifest_path} -y --from #{wallet.key_name}", fees: true)
       return false unless result.success?
 
       json = JSON.parse(result.out)
       dseq = json['logs'][0]['events'][0]['attributes'].find{ |d| d['key'] == 'dseq' }['value']
-      File.rename(sdl_path, File.join(cli.home_directory, "#{dseq}.yml"))
+      File.rename(manifest_path, File.join(cli.home_directory, "#{dseq}.yml"))
       true
     rescue TTY::Command::ExitError
       false

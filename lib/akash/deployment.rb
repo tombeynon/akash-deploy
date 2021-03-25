@@ -1,21 +1,5 @@
 module Akash
   class Deployment
-    class EscrowAccount
-      attr_reader :data
-
-      def initialize(data)
-        @data = data
-      end
-
-      def balance
-        data['balance']
-      end
-
-      def transferred
-        data['transferred']
-      end
-    end
-
     class Group
       attr_reader :data
 
@@ -50,8 +34,20 @@ module Akash
       state == 'active'
     end
 
-    def sdl_exists?
-      File.exist?(sdl_path)
+    def active_lease?
+      active_lease.present?
+    end
+
+    def manifest_active?
+      active_lease.manifest_active?
+    end
+
+    def manifest_exists?
+      File.exist?(manifest_path)
+    end
+
+    def persisted?
+      dseq.present?
     end
 
     def dseq
@@ -62,11 +58,11 @@ module Akash
       data.dig('deployment', 'state')
     end
 
-    def sdl_content
-      File.read(sdl_path) if sdl_exists?
+    def manifest_content
+      File.read(manifest_path) if manifest_exists?
     end
 
-    def sdl_path
+    def manifest_path
       File.join(cli.home_directory, "#{dseq}.yml")
     end
 
@@ -78,6 +74,10 @@ module Akash
 
     def close
       close_deployment
+    end
+
+    def active_lease
+      @active_lease ||= leases.active.first
     end
 
     def escrow
@@ -92,10 +92,14 @@ module Akash
       @leases ||= Leases.new(cli, wallet, dseq)
     end
 
+    def bids
+      @bids ||= Bids.new(cli, wallet, dseq)
+    end
+
     private
 
-    def update_deployment(sdl_path)
-      result = cli.run("akash tx deployment update #{sdl_path} --dseq #{dseq} -y --from #{wallet.key_name}", fees: true)
+    def update_deployment(manifest_path)
+      result = cli.run("akash tx deployment update #{manifest_path} --dseq #{dseq} -y --from #{wallet.key_name}", fees: true)
       result.success?
     rescue TTY::Command::ExitError
       false
@@ -103,10 +107,7 @@ module Akash
 
     def close_deployment
       result = cli.run("akash tx deployment close --dseq #{dseq} -y --from #{wallet.key_name}", fees: true)
-      return false unless result.success?
-
-      File.delete(sdl_path) if sdl_exists?
-      true
+      result.success?
     rescue TTY::Command::ExitError
       false
     end

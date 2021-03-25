@@ -13,6 +13,13 @@ module Akash
       leases.find { |l| l.provider == id }
     end
 
+    def create(bid: bid)
+      result = cli.run("akash tx market lease create -y --from #{wallet.key_name} --owner #{wallet.address} --dseq #{bid.dseq} --oseq #{bid.oseq} --gseq #{bid.gseq} --provider #{bid.provider}", fees: true)
+      result.success?
+    rescue TTY::Command::ExitError
+      false
+    end
+
     def active
       leases.find_all { |l| l.active? }
     end

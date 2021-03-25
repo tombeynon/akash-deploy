@@ -11,8 +11,12 @@
         <td><%= @deployment.state %></td>
       </tr>
       <tr>
+        <td>Bids</td>
+        <td><%= link_to "#{@deployment.bids.all.count} bids", deployment_bids_path(@deployment.dseq) %></td>
+      </tr>
+      <tr>
         <td>Leases</td>
-        <td><%= link_to @deployment.leases.all.count, deployment_leases_path(@deployment.dseq) %></td>
+        <td><%= link_to "#{@deployment.leases.all.count} leases", deployment_leases_path(@deployment.dseq) %></td>
       </tr>
       <tr>
         <td>Escrow balance</td>
@@ -22,6 +26,9 @@
         <td>Escrow spend</td>
         <td><%= format_balance(@deployment.escrow.transferred) %></td>
       </tr>
+      <% if @deployment.manifest_active? %>
+        <%= render "service_status", services: @deployment.active_lease.service_status %>
+      <% end %>
       <% @deployment.groups.each do |group| %>
         <% group.resources.each do |resource| %>
           <tr>
@@ -40,13 +47,16 @@
       <% end %>
     </table>
     <p>
-      <%= link_to 'Back', deployments_path %> |
-      <%= link_to 'Update', edit_deployment_path(@deployment.dseq) %> |
-      <%= link_to 'Close', deployment_path(@deployment.dseq), method: :delete, data: {confirm: 'Are you sure you want to close this deployment?'} %>
+      <%= link_to 'Back', deployments_path %>
+
+      <% if @deployment.active? %>
+        | <%= link_to 'Update', edit_deployment_path(@deployment.dseq) %>
+        | <%= link_to 'Close deployment', deployment_path(@deployment.dseq), method: :delete, data: {confirm: 'Are you sure you want to close this deployment?'} %>
+      <% end %>
     </p>
   </div>
   <div class="col">
-    <pre><%= @deployment.sdl_content %></pre>
+    <pre><%= @deployment.manifest_content %></pre>
     <hr />
     <pre><%= JSON.pretty_generate(@deployment.data) %></pre>
   </div>

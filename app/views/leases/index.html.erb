@@ -17,7 +17,9 @@
             <td><%= lease.provider %></td>
             <td><%= lease.state %></td>
             <td><%= "#{format_balance(lease.price)}" %></td>
-            <td><%= link_to 'View', deployment_lease_path(@deployment.dseq, lease.provider) %></td>
+            <td>
+              <%= link_to 'View', deployment_lease_path(@deployment.dseq, lease.provider) %>
+            </td>
           </tr>
         <% end %>
       </table>

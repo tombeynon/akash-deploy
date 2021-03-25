@@ -1,0 +1,33 @@
+<h1 class="display-4 mb-4">
+  <%= link_to "Deployment ##{@deployment.dseq}", deployment_path(@deployment.dseq), class: 'text-reset' %> > Bids
+</h1>
+
+<div class="row">
+  <div class="col">
+    <% if @bids.all.any? %>
+      <table class="table">
+        <tr>
+          <th>Provider</th>
+          <th>State</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+        <% @bids.all.each do |bid| %>
+          <tr>
+            <td><%= bid.provider %></td>
+            <td><%= bid.state %></td>
+            <td><%= "#{format_balance(bid.price)}" %></td>
+            <td>
+              <% unless @deployment.active_lease? %>
+                <%= link_to 'Create lease', new_deployment_lease_path(@deployment.dseq, provider: bid.provider) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p>No bids</p>
+    <% end %>
+    <p><%= link_to 'Back', deployment_path(@deployment.dseq) %>
+  </div>
+</div>

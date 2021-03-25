@@ -18,11 +18,11 @@ class DeploymentsController < ApplicationController
   end
 
   def create
-    sdl_content = deployment_params[:sdl_content]
-    if sdl_content.present? && @akash.deployments.create(content: sdl_content)
+    manifest_content = deployment_params[:manifest_content]
+    if manifest_content.present? && @akash.deployments.create(content: manifest_content)
       redirect_to deployments_path
     else
-      error = 'Please enter your SDL content (deploy.yml)' unless sdl_content.present?
+      error = 'Please enter your manifest content (deploy.yml)' unless manifest_content.present?
       # improve errors
       error ||= 'Something went wrong (check docker output)'
       redirect_to new_deployment_path, flash: { error: error }
@@ -31,11 +31,11 @@ class DeploymentsController < ApplicationController
 
   def update
     @deployment = @akash.deployments.find(params[:id])
-    sdl_content = deployment_params[:sdl_content]
-    if sdl_content.present? && @deployment.update(content: sdl_content)
-      redirect_to deployments_path
+    manifest_content = deployment_params[:manifest_content]
+    if manifest_content.present? && @deployment.update(content: manifest_content)
+      redirect_to deployments_path(@deployment.dseq)
     else
-      error = 'Please enter your SDL content (deploy.yml)' unless sdl_content.present?
+      error = 'Please enter your manifest content (deploy.yml)' unless manifest_content.present?
       # improve errors
       error ||= 'Something went wrong (check docker output)'
       redirect_to new_deployment_path, flash: { error: error }
@@ -54,6 +54,6 @@ class DeploymentsController < ApplicationController
   private
 
   def deployment_params
-    params.require(:deployment).permit(:sdl_content)
+    params.require(:deployment).permit(:manifest_content)
   end
 end

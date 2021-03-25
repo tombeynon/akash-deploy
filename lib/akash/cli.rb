@@ -24,12 +24,13 @@ module Akash
     end
 
     def cmd_json(command, **args)
-      JSON.parse(cmd(command, **args))
+      res = cmd(command, **args)
+      JSON.parse(res) if res.present?
     end
 
     def cmd(command, **args)
       out, err = run(command, **args)
-      raise err.inspect if err.present?
+      puts err.inspect if err.present?
       out.strip
     end
 
