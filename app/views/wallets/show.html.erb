@@ -6,6 +6,23 @@
     <% else %>
       <p>No wallet found.</p>
     <% end %>
-    <p><%= link_to 'Create new', [:new, :wallet] %></p>
+    <p><%= link_to 'Create new wallet', [:new, :wallet] %></p>
+  </div>
+  <div class="col">
+    <h3>Certificate</h3>
+    <% if @akash.wallet.certificate.exists? %>
+      <p>
+        <% if params[:certificate].present? %>
+          <%= link_to 'Hide Certificate', wallet_path %>
+        <% else %>
+          <%= link_to 'Show Certificate', wallet_path(certificate: true) %>
+        <% end %>
+        | <%= link_to 'Revoke Certificate', certificate_path, method: :delete, data: {confirm: 'Are you sure you want to revoke and delete this certificate? A transaction will be made to remove it.'}  %>
+      </p>
+      <% if params[:certificate].present? %>
+        <p><pre><%= @akash.wallet.certificate.to_s %></pre></p>
+      <% end %>
+    <% end %>
+    <p><%= link_to 'Create new certificate', [:new, :certificate] %></p>
   </div>
 </div>

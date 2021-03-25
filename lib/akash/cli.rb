@@ -8,11 +8,15 @@ module Akash
     end
 
     def rpc_node
-      @node ||= tty.run("curl -s #{network_url}/rpc-nodes.txt | sort -R | head -1").out
+      @rpc_node ||= tty.run("curl -s #{network_url}/rpc-nodes.txt | sort -R | head -1").out.strip
+    end
+
+    def chain_id
+      @chain_id ||= tty.run("curl -s #{network_url}/chain-id.txt").out.strip
     end
 
     def version
-      @version ||= tty.run("curl -s #{network_url}/version.txt").out
+      @version ||= tty.run("curl -s #{network_url}/version.txt").out.strip
     end
 
     def network_url
@@ -42,11 +46,13 @@ module Akash
 
     private
 
-    def build_command(command, home: false, keyring: false, node: false)
+    def build_command(command, home: false, keyring: false, node: false, fees: false)
       parts = [command]
       parts.push("--home #{home_directory}")
       parts.push("--keyring-backend test") if keyring # insecure backend
-      parts.push("--node #{rpc_node}") if node
+      parts.push("--node #{rpc_node}") if node || fees
+      parts.push("--chain-id #{chain_id}") if fees
+      parts.push("--fees #{fees == true ? Akash::FEE_RATE : fees}") if fees
       parts.join(' ')
     end
 

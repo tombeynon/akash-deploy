@@ -4,6 +4,7 @@ services:
     build: .
     volumes:
       - .:/app
+      - ./akash:/root/akash
       - bundle_cache:/usr/local/bundle:delegated
     ports:
       - "3000:3000"

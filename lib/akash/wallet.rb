@@ -11,6 +11,10 @@ module Akash
       address.present?
     end
 
+    def certificate
+      @certificate ||= Certificate.new(cli, key_name, address)
+    end
+
     def address
       @address ||= cli.cmd("akash keys show #{key_name} -a", keyring: true)
     rescue TTY::Command::ExitError
