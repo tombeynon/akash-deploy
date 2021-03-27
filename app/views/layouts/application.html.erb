@@ -28,13 +28,16 @@
       <p class="my-0 me-md-auto fw-normal">
         <%= @akash.wallet.exists? ? @akash.wallet.address : '' %>
       </p>
-      <nav class="my-2 my-md-0 me-md-3">
-        <%= link_to 'Home', root_path, class: 'p-2 text-dark' %>
-        <%= link_to 'Wallet', wallet_path, class: 'p-2 text-dark' %>
-        <% if @akash.wallet.exists? %>
-          <%= link_to 'Deployments', deployments_path, class: 'p-2 text-dark' %>
-        <% end %>
-      </nav>
+      <% if keyring_password? %>
+        <nav class="my-2 my-md-0 me-md-3">
+          <%= link_to 'Home', root_path, class: 'p-2 text-dark' %>
+          <%= link_to 'Wallet', wallet_path, class: 'p-2 text-dark' %>
+          <% if @akash.wallet.exists? %>
+            <%= link_to 'Deployments', deployments_path, class: 'p-2 text-dark' %>
+          <% end %>
+          <%= link_to 'Close wallet', password_path, method: :delete, class: 'p-2 text-dark' %>
+        </nav>
+      <% end %>
       <%# <a class="btn btn-outline-primary" href="#">Sign up</a> %>
     </header>
 

@@ -7,6 +7,7 @@
       <p>No wallet found.</p>
     <% end %>
     <p><%= link_to 'Create new wallet', [:new, :wallet] %></p>
+    <p><%= link_to 'Delete wallet', [:wallet], method: :delete %></p>
   </div>
   <div class="col">
     <h3>Certificate</h3>

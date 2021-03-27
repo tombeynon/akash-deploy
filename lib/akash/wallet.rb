@@ -28,16 +28,35 @@ module Akash
 
     def create
       input = []
-      input.unshift('y') if exists?
+      input.push(cli.keyring_password)
+      if cli.keyring_exists?
+        input.push('y')
+      else
+        input.push(cli.keyring_password)
+      end
       out, err = cli.run("akash keys add #{key_name}", input: input, keyring: true)
       err
     end
 
     def restore(recovery_phrase)
-      input = [recovery_phrase]
-      input.unshift('y') if exists?
-      out, err = cli.run("akash keys add #{key_name} --recover", input: input, keyring: true)
+      input = []
+      if cli.keyring_exists?
+        input.push(cli.keyring_password)
+        input.push('y')
+        input.push(recovery_phrase)
+      else
+        input.push(recovery_phrase)
+        input.push(cli.keyring_password)
+        input.push(cli.keyring_password)
+      end
+      out, err = cli.run("akash keys add #{key_name} --recover --keyring-backend file", input: input)
       out
+    end
+
+    def delete
+      input = []
+      input.push('y')
+      cli.run("akash keys delete #{key_name}", input: input, keyring: true)
     end
   end
 end

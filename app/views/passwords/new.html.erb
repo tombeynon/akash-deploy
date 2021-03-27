@@ -1,0 +1,19 @@
+<h1 class="display-4 mb-4">Enter Password</h1>
+<div class="row">
+  <div class="col">
+    <p>Please enter your keyring password</p>
+
+    <%= form_for :password, url: password_path do |f| %>
+      <div class="form-group">
+        <%= f.label :keyring_password, 'Keyring password' %><br />
+        <%= f.password_field :keyring_password, class: 'form-control' %><br />
+      </div>
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+      <% if @akash.cli.keyring_exists? %>
+        <%= link_to 'Delete keyring', [:keyring], class: 'btn btn-danger', method: :delete %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col">
+  </div>
+</div>

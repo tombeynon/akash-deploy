@@ -1,10 +1,23 @@
 module Akash
   class CLI
-    attr_accessor :network, :home_directory
+    attr_accessor :network, :home_directory, :keyring_password
 
-    def initialize(network, home_directory)
+    def initialize(network, home_directory, keyring_password = nil)
       @network = network
       @home_directory = home_directory
+      @keyring_password = keyring_password
+    end
+
+    def keyring_exists?
+      File.exist?(keyring_directory) && !Dir.empty?(keyring_directory)
+    end
+
+    def delete_keyring
+      FileUtils.remove_dir(keyring_directory)
+    end
+
+    def keyring_directory
+      File.join(home_directory, 'keyring-file')
     end
 
     def rpc_node
@@ -34,23 +47,20 @@ module Akash
       out.strip
     end
 
-    def run(command, input: nil, **args)
-      if input.is_a?(Array)
-        in_stream = StringIO.new
-        input.each { |i| in_stream.puts i }
-        in_stream.rewind
-        tty.run(build_command(command, **args), in: in_stream, pty: true)
-      else
-        tty.run(build_command(command, **args), input: input, pty: true)
-      end
+    def run(command, input: [], keyring: false, **args)
+      input.unshift(keyring_password) if keyring
+      in_stream = StringIO.new
+      input.each { |i| in_stream.puts i }
+      in_stream.rewind
+      tty.run(build_command(command, keyring: keyring, **args), in: in_stream, pty: true)
     end
 
     private
 
-    def build_command(command, home: false, keyring: false, node: false, fees: false)
+    def build_command(command, keyring: false, node: false, fees: false)
       parts = [command]
       parts.push("--home #{home_directory}")
-      parts.push("--keyring-backend test") if keyring || fees # insecure backend
+      parts.push('--keyring-backend file') if keyring || fees
       parts.push("--node #{rpc_node}") if node || fees
       parts.push("--chain-id #{chain_id}") if fees
       parts.push("--fees #{fees == true ? Akash::FEE_RATE : fees} --gas=auto") if fees
