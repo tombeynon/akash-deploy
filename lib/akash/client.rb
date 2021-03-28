@@ -6,7 +6,7 @@ module Akash
     def initialize(keyring_password = nil)
       @network = ENV['AKASH_NET']
       @key_name = ENV['KEY_NAME']
-      @home_directory = '/root/akash'
+      @home_directory = ENV['AKASH_HOME']
       @cli = CLI.new(network, home_directory, keyring_password)
     end
 
