@@ -8,10 +8,6 @@
     <% end %>
 
     <%= form_for :certificate, url: certificate_path do |f| %>
-      <div class="form-group">
-        <%= f.label :content, 'Content (leave blank to generate new)' %><br />
-        <%= f.text_area :content, class: 'form-control' %><br />
-      </div>
       <% if @akash.wallet.certificate.exists? %>
         <%= f.submit 'Create', data: {confirm: 'Your existing certificate will be lost. Are you sure?'}, class: 'btn btn-primary' %>
       <% else %>
