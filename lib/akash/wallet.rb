@@ -16,6 +16,8 @@ module Akash
     end
 
     def address
+      return unless cli.keyring_password.present?
+
       @address ||= cli.cmd("akash keys show #{key_name} -a", keyring: true)
     rescue TTY::Command::ExitError
     end
