@@ -20,6 +20,11 @@ Note the following two options:
 
 `-p 3000:3000` - the first argument is the port the tool will run on on your machine.
 
+**The deploy tool should now be accessible at [http://localhost:3000](http://localhost:3000)** (or the port specified above)
+
+
+### Updates
+
 To update to the latest version, just pull the latest docker image:
 
 ```
