@@ -29,12 +29,12 @@ Donate me a coffee to help me work faster: akash1w25hcy6sq66x8j0hwcda4f9fn7l63nt
 You will need [Docker installed](https://docs.docker.com/get-docker) on your machine first. After that it's a simple one line command to run:
 
 ```
-docker run -v ~/.akash:/root/akash -p 3000:3000 --rm -it tombeynon/akash-deploy
+docker run -v ~/.akash-ui:/root/akash -p 3000:3000 --rm -it tombeynon/akash-deploy
 ```
 
 Note the following two options:
 
-`-v ~/.akash:/root/akash` - the first argument is your Akash home directory. This can be an existing or new directory.
+`-v ~/.akash-ui:/root/akash` - the first argument is your Akash home directory. Note we use `~/.akash-ui` here instead of the default `~/.akash` to protect existing installations. Feel free to use whatever. 
 
 `-p 3000:3000` - the first argument is the port the tool will run on on your machine.
 
