@@ -20,6 +20,8 @@ module Akash
     end
 
     def uris
+      return [] unless data['uris']
+
       data['uris'].map do |uri|
         URI::HTTP.build(host: uri)
       end

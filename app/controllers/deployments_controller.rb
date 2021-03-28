@@ -36,7 +36,7 @@ class DeploymentsController < ApplicationController
     @deployment = @akash.deployments.find(params[:id])
     manifest_content = deployment_params[:manifest_content]
     if manifest_content.present? && @deployment.update(content: manifest_content)
-      redirect_to deployments_path(@deployment.dseq)
+      redirect_to deployment_path(@deployment.dseq)
     else
       error = 'Please enter your manifest content (deploy.yml)' unless manifest_content.present?
       # improve errors
