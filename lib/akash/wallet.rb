@@ -30,7 +30,6 @@ module Akash
 
     def create
       input = []
-      input.push(cli.keyring_password)
       if cli.keyring_exists?
         input.push('y')
       else

@@ -10,6 +10,15 @@ module Akash
       @cli = CLI.new(network, home_directory, keyring_password)
     end
 
+    def block_height
+      status.dig('SyncInfo', 'latest_block_height')
+    end
+
+    def block_time
+      date = status.dig('SyncInfo', 'latest_block_time')
+      DateTime.parse(date)
+    end
+
     def wallet
       @wallet ||= Wallet.new(cli, key_name)
     end

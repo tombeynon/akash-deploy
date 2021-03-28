@@ -56,7 +56,7 @@
           <div class="col">
             Version: <%= @akash.cli.version %><br />
             Node: <%= @akash.cli.rpc_node %><br />
-            Latest Block: <%= @block_height %> (<%= @block_time %>)
+            Latest Block: <%= @akash.block_height %> (<%= @akash.block_time.strftime('%e %b %Y %H:%M:%S') %>)
           </div>
           <div class="col">
             <p class="text-right" style="text-align:right">

@@ -8,6 +8,7 @@ ENV AKASH_NET=mainnet
 ENV AKASH_CLI_VERSION=latest
 ENV AKASH_HOME=/root/akash
 ENV KEY_NAME=deploy
+ENV FEE_RATE=5000uakt
 
 # Install Akash
 WORKDIR /usr

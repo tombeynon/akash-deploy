@@ -7,6 +7,7 @@
         <tr>
           <th>DSEQ</th>
           <th>State</th>
+          <th>URI</th>
           <th>Escrow</th>
           <th></th>
         </tr>
@@ -14,6 +15,11 @@
           <tr>
             <td><%= deployment.dseq %></td>
             <td><%= deployment.state %></td>
+            <td>
+              <% if uri = deployment.uris.first %>
+                <%= link_to uri.host, uri.to_s, target: :blank, class: 'small' %>
+              <% end %>
+            </td>
             <td>
               <%= "#{format_balance(deployment.escrow.balance)}" %>
               <%= "(#{format_balance(deployment.escrow.transferred)} spent)" %>

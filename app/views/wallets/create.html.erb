@@ -1,12 +1,9 @@
 <h1 class="display-4 mb-4">New Wallet</h1>
 <div class="row">
   <div class="col">
-    <% if @error %>
-      <p><%= @error %></p>
-    <% else %>
-      <p><strong>MAKE SURE YOU SAVE YOUR MNEUMONIC</strong></p>
-      <%= simple_format @output %>
-    <% end %>
+    <p><strong>MAKE SURE YOU SAVE YOUR MNEUMONIC</strong></p>
+    <%= simple_format @output %>
+    <p><%= link_to 'View wallet', wallet_path, class: 'btn btn-primary' %>
   </div>
   <div class="col">
   </div>
