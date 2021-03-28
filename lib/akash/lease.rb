@@ -68,6 +68,12 @@ module Akash
       services.map(&:uris).flatten
     end
 
+    def logs
+      return '' unless logs_data
+
+      logs_data.delete_suffix("unexpected EOF")
+    end
+
     def services
       return [] unless status_data['services']
 
@@ -92,6 +98,10 @@ module Akash
 
     def escrow
       @escrow ||= EscrowPayment.new(data.dig('escrow_payment'))
+    end
+
+    def logs_data
+      @logs_data ||= cli.cmd("akash provider lease-logs --from #{wallet.key_name} --dseq #{dseq} --oseq #{oseq} --gseq #{gseq} --provider #{provider}", node: true, keyring: true)
     end
 
     def status_data

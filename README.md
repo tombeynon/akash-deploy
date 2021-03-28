@@ -55,7 +55,7 @@ You can pass the following environment variables to the application via `docker 
 
 ## Roadmap
 
-- Container logs
+- ~~Container logs~~
 - Manifest builder UI
 - Better fee handling
 - Manage multiple keys

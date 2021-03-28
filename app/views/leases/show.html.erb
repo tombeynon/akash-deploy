@@ -35,6 +35,7 @@
     </table>
     <p>
       <%= link_to 'Back', deployment_leases_path(@deployment.dseq), class: 'btn' %>
+      <%= link_to 'View logs', deployment_lease_logs_path(@deployment.dseq, @lease.provider), class: 'btn btn-primary' %>
       <% unless @lease.closed? %>
         <% if @deployment.manifest_exists? %>
           <%= link_to 'Send manifest', deployment_lease_path(@deployment.dseq, @lease.provider), method: :patch, class: 'btn btn-primary' %>

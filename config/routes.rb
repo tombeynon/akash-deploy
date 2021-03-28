@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resource :certificate, only: %i[new create destroy]
   resources :deployments do
     resources :bids, only: [:index]
-    resources :leases
+    resources :leases do
+      resource :logs, only: [:show]
+    end
   end
 end

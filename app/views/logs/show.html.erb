@@ -1,0 +1,7 @@
+<h1 class="display-4 mb-4">
+  <%= link_to "Deployment ##{@deployment.dseq}", deployment_path(@deployment.dseq), class: 'text-reset' %> > Logs
+</h1>
+<p><%= link_to 'Back', deployment_lease_path(@deployment.dseq, @lease.provider), class: 'btn btn-primary' %>
+<pre>
+  <%= @lease.logs %>
+</pre>
