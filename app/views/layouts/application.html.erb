@@ -36,6 +36,7 @@
             <%= link_to 'Deployments', deployments_path, class: 'p-2 text-dark' %>
           <% end %>
           <%= link_to 'Close wallet', password_path, method: :delete, class: 'p-2 text-dark' %>
+          <%= fa_icon "refresh", class: 'p-2', onclick: 'Turbolinks.visit(window.location)', style: 'cursor: pointer' %>
         </nav>
       <% end %>
       <%# <a class="btn btn-outline-primary" href="#">Sign up</a> %>
@@ -58,6 +59,11 @@
             Latest Block: <%= @block_height %> (<%= @block_time %>)
           </div>
           <div class="col">
+            <p class="text-right" style="text-align:right">
+              <%= link_to 'Akash Network | The Unstoppable Cloud', 'https://akash.network/', target: '_blank' %><br />
+              <%= link_to 'Akash Documentation', 'https://docs.akash.network/', target: '_blank' %><br />
+              <%= link_to 'Deploy UI Github', 'https://github.com/tombeynon/akash-deploy', target: '_blank' %><br />
+            </p>
           </div>
         </div>
       </footer>

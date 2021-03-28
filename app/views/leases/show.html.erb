@@ -34,12 +34,12 @@
       <% end %>
     </table>
     <p>
-      <%= link_to 'Back', deployment_leases_path(@deployment.dseq) %>
+      <%= link_to 'Back', deployment_leases_path(@deployment.dseq), class: 'btn' %>
       <% unless @lease.closed? %>
         <% if @deployment.manifest_exists? %>
-          | <%= link_to 'Send manifest', deployment_lease_path(@deployment.dseq, @lease.provider), method: :patch %>
+          <%= link_to 'Send manifest', deployment_lease_path(@deployment.dseq, @lease.provider), method: :patch, class: 'btn btn-primary' %>
         <% end %>
-        | <%= link_to 'Close lease', deployment_lease_path(@deployment.dseq, @lease.provider), method: :delete, data: { confirm: 'Are you sure you want to close this lease?' } %>
+        <%= link_to 'Close lease', deployment_lease_path(@deployment.dseq, @lease.provider), method: :delete, data: { confirm: 'Are you sure you want to close this lease?' }, class: 'btn btn-danger' %>
       <% end %>
     </p>
   </div>

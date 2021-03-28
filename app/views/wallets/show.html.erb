@@ -3,27 +3,34 @@
   <div class="col">
     <% if @akash.wallet.exists? %>
       <%= render "wallet", wallet: @akash.wallet %>
+      <p>
+        <%= link_to 'Create new wallet', [:new, :wallet], class: 'btn btn-warning' %>
+        <%= link_to 'Delete wallet', [:wallet], method: :delete, data: {confirm: 'Are you sure you want to delete this wallet?'}, class: 'btn btn-danger' %>
+      </p>
     <% else %>
       <p>No wallet found.</p>
+      <p><%= link_to 'Create new wallet', [:new, :wallet], class: 'btn btn-primary' %> </p>
     <% end %>
-    <p><%= link_to 'Create new wallet', [:new, :wallet] %></p>
-    <p><%= link_to 'Delete wallet', [:wallet], method: :delete %></p>
   </div>
   <div class="col">
-    <h3>Certificate</h3>
-    <% if @akash.wallet.certificate.exists? %>
+    <% if @akash.wallet.exists? %>
+      <h3>Certificate</h3>
       <p>
-        <% if params[:certificate].present? %>
-          <%= link_to 'Hide Certificate', wallet_path %>
+        <% if @akash.wallet.certificate.exists? %>
+          <% if params[:certificate].present? %>
+            <%= link_to 'Hide Certificate', wallet_path, class: 'btn btn-secondary' %>
+          <% else %>
+            <%= link_to 'Show Certificate', wallet_path(certificate: true), class: 'btn btn-secondary' %>
+          <% end %>
+          <%= link_to 'Create new certificate', [:new, :certificate], class: 'btn btn-warning' %>
+          <%= link_to 'Revoke Certificate', certificate_path, method: :delete, data: {confirm: 'Are you sure you want to revoke and delete this certificate? A transaction will be made to remove it.'}, class: 'btn btn-danger'  %>
         <% else %>
-          <%= link_to 'Show Certificate', wallet_path(certificate: true) %>
+          <%= link_to 'Create new certificate', [:new, :certificate], class: 'btn btn-primary' %>
         <% end %>
-        | <%= link_to 'Revoke Certificate', certificate_path, method: :delete, data: {confirm: 'Are you sure you want to revoke and delete this certificate? A transaction will be made to remove it.'}  %>
       </p>
       <% if params[:certificate].present? %>
         <p><pre><%= @akash.wallet.certificate.to_s %></pre></p>
       <% end %>
     <% end %>
-    <p><%= link_to 'Create new certificate', [:new, :certificate] %></p>
   </div>
 </div>

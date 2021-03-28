@@ -47,11 +47,11 @@
       <% end %>
     </table>
     <p>
-      <%= link_to 'Back', deployments_path %>
+      <%= link_to 'Back', deployments_path, class: 'btn' %>
 
       <% if @deployment.active? %>
-        | <%= link_to 'Update', edit_deployment_path(@deployment.dseq) %>
-        | <%= link_to 'Close deployment', deployment_path(@deployment.dseq), method: :delete, data: {confirm: 'Are you sure you want to close this deployment?'} %>
+        <%= link_to 'Update', edit_deployment_path(@deployment.dseq), class: 'btn btn-secondary' %>
+        <%= link_to 'Close deployment', deployment_path(@deployment.dseq), method: :delete, data: {confirm: 'Are you sure you want to close this deployment?'}, class: 'btn btn-danger' %>
       <% end %>
     </p>
   </div>

@@ -5,7 +5,8 @@
     <% if @akash.wallet.exists? %>
       <%= render "wallet", wallet: @akash.wallet %>
     <% else %>
-      <p>No wallet found. <%= link_to 'Create new', [:new, :wallet] %></p>
+      <p>No wallet found.</p>
+      <p><%= link_to 'Create new', [:new, :wallet], class: 'btn btn-primary' %></p>
     <% end %>
   </div>
   <% if @akash.wallet.exists? %>

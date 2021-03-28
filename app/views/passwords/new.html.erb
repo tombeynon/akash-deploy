@@ -10,7 +10,7 @@
       </div>
       <%= f.submit 'Submit', class: 'btn btn-primary' %>
       <% if @akash.cli.keyring_exists? %>
-        <%= link_to 'Delete keyring', [:keyring], class: 'btn btn-danger', method: :delete %>
+        <%= link_to 'Delete keyring', [:keyring], class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure you want to delete the keyring?' } %>
       <% end %>
     <% end %>
   </div>
