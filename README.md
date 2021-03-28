@@ -6,7 +6,21 @@ This tool runs locally on your own machine using Docker. I'm looking into a host
 
 <img width="1357" alt="Screenshot 2021-03-28 at 04 32 34" src="https://user-images.githubusercontent.com/670623/112741543-ab72a280-8f7e-11eb-966d-67dad4aff37d.png">
 
-Once you've got the tool running, it should direct you through the process of deploying to some extent. You should also [check out the Examples wiki](https://github.com/tombeynon/akash-deploy/wiki/Examples) for some ideas.
+Once you've [got the tool running](#installation), it will direct you through the process of deploying to some extent. You should also [check out the Examples wiki](https://github.com/tombeynon/akash-deploy/wiki/Examples) for some ideas.
+
+## Roadmap
+
+- ~~Container logs~~
+- Manifest builder UI
+- Local currency pricing and forecasts
+- Better fee handling
+- Manage multiple keys
+- Basic transaction history
+- Extract the Akash library as a Ruby gem (let me know if anyone is interested in this)
+- Hosted version with self-custody via Keplr. Unsure how to handle certificate
+- Make it prettier
+
+Donate me a coffee to help me work faster: akash1w25hcy6sq66x8j0hwcda4f9fn7l63ntx3h6656
 
 ## Installation
 
@@ -54,19 +68,6 @@ You can pass the following environment variables to the application via `docker 
 `KEY_NAME=deploy` - the key name used for the wallet
 
 `FEE_RATE=5000uakt` - fee rate for all transactions
-
-## Roadmap
-
-- ~~Container logs~~
-- Manifest builder UI
-- Better fee handling
-- Manage multiple keys
-- Basic transaction history
-- Extract the Akash library as a Ruby gem (let me know if anyone is interested in this)
-- Hosted version with self-custody via Keplr. Unsure how to handle certificate
-- Make it prettier
-
-Donate me a coffee to help me work faster: akash1w25hcy6sq66x8j0hwcda4f9fn7l63ntx3h6656
 
 ## Disclaimer
 
