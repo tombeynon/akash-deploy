@@ -26,6 +26,10 @@ module Akash
       deployments.find_all { |d| d.active? }
     end
 
+    def closed
+      deployments.find_all { |d| !d.active? }
+    end
+
     def deployments
       @deployments ||= (data['deployments'] || []).reverse.map do |deploy|
         new(deploy)

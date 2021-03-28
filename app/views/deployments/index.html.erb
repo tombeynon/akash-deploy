@@ -2,7 +2,15 @@
 
 <div class="row">
   <div class="col">
-    <% if @deployments.all.any? %>
+    <ul class="nav nav-tabs mb-3">
+      <li class="nav-item">
+        <%= link_to 'Active', {state: 'active'}, class: active_class('nav-link', params[:state].blank? || params[:state] == 'active')  %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Closed', {state: 'closed'}, class: active_class('nav-link', params[:state] == 'closed')  %>
+      </li>
+    </ul>
+    <% if @deployments.any? %>
       <table class="table">
         <tr>
           <th>DSEQ</th>
@@ -11,7 +19,7 @@
           <th>Escrow</th>
           <th></th>
         </tr>
-        <% @deployments.all.each do |deployment| %>
+        <% @deployments.each do |deployment| %>
           <tr>
             <td><%= deployment.dseq %></td>
             <td><%= deployment.state %></td>

@@ -5,7 +5,11 @@ class DeploymentsController < ApplicationController
   before_action :require_escrow_funds, only: %i[new create]
 
   def index
-    @deployments = @akash.deployments
+    if params[:state] == 'closed'
+      @deployments = @akash.deployments.closed
+    else
+      @deployments = @akash.deployments.active
+    end
   end
 
   def show

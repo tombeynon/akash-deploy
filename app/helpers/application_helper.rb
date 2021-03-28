@@ -3,6 +3,10 @@ module ApplicationHelper
     balance['amount'] + balance['denom']
   end
 
+  def active_class(class_string, active, active_class: 'active')
+    active ? "#{class_string} #{active_class}" : class_string
+  end
+
   def flash_class(level)
     case level&.to_sym
     when :notice then 'alert alert-info'
