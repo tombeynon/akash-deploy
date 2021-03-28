@@ -2,6 +2,7 @@ class DeploymentsController < ApplicationController
   before_action :require_wallet
   before_action :require_certificate, only: %i[new edit create update destroy]
   before_action :require_funds, only: %i[new edit create update destroy]
+  before_action :require_escrow_funds, only: %i[new create]
 
   def index
     @deployments = @akash.deployments
@@ -54,6 +55,12 @@ class DeploymentsController < ApplicationController
   end
 
   private
+
+  def require_escrow_funds
+    return if @akash.wallet.balance('uakt') > Akash.escrow_amount_uakt
+
+    redirect_to wallet_path, flash: { error: "Deployment requires #{Akash.escrow_amount_uakt}uakt escrow" }
+  end
 
   def deployment_params
     params.require(:deployment).permit(:manifest_content)
