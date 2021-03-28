@@ -63,6 +63,7 @@ module Akash
           input.push('y')
         end
       else
+        input.push(recovery_phrase)
         input.push(cli.keyring_password)
         input.push(cli.keyring_password)
       end
