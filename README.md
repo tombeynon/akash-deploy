@@ -79,6 +79,7 @@ I built this very quickly (first commit was 5 days ago at the time of writing) a
 
 ## Further reading
 
+- [Examples](https://github.com/tombeynon/akash-deploy/wiki/Examples)
 - [Hello World tutorial](https://github.com/tombeynon/akash-hello-world)
 - [Akash Documentation](https://docs.akash.network/)
 - [Akash Network](https://akash.network/)
