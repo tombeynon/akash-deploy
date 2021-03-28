@@ -62,4 +62,10 @@ Donate me a coffee to help me work faster: akash1w25hcy6sq66x8j0hwcda4f9fn7l63nt
 
 ## Disclaimer
 
-I built this very quickly (first commit was 7 days ago at the time of writing) and it's one of my first projects in anything related to blockchain. I'm a Ruby developer by trade so while I can be confident in most of this application, Akash is still new to me. Here be dragons (maybe).
+I built this very quickly (first commit was 5 days ago at the time of writing) and it's one of my first projects in anything related to blockchain. I'm a Ruby developer by trade so while I can be confident in most of this application, Akash is still new to me. Here be dragons (maybe).
+
+## Further reading
+
+- [Hello World tutorial](https://github.com/tombeynon/akash-hello-world)
+- [Akash Documentation](https://docs.akash.network/)
+- [Akash Network](https://akash.network/)
