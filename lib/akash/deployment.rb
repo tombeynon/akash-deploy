@@ -60,6 +60,11 @@ module Akash
       data.dig('deployment', 'state')
     end
 
+    def uris
+      return [] unless active_lease?
+      active_lease.uris
+    end
+
     def manifest_content
       File.read(manifest_path) if manifest_exists?
     end

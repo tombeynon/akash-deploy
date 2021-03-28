@@ -30,7 +30,7 @@
         <td><%= format_balance(@lease.escrow.withdrawn) %></td>
       </tr>
       <% if @lease.manifest_active? %>
-        <%= render "deployments/service_status", services: @lease.service_status %>
+        <%= render "deployments/service_status", services: @lease.services %>
       <% end %>
     </table>
     <p>

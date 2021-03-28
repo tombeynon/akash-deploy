@@ -37,7 +37,7 @@ module Akash
     end
 
     def manifest_active?
-      service_status.any?
+      services.any?
     end
 
     def state
@@ -64,10 +64,16 @@ module Akash
       data.dig('lease', 'price')
     end
 
-    def service_status
-      return {} unless status_data['services']
+    def uris
+      services.map(&:uris).flatten
+    end
 
-      status_data['services']
+    def services
+      return [] unless status_data['services']
+
+      status_data['services'].map do |key, data|
+        Service.new(key, data)
+      end
     end
 
     def send_manifest(manifest_path)

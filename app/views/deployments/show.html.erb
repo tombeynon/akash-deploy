@@ -27,7 +27,7 @@
         <td><%= format_balance(@deployment.escrow.transferred) %></td>
       </tr>
       <% if @deployment.manifest_active? %>
-        <%= render "service_status", services: @deployment.active_lease.service_status %>
+        <%= render "service_status", services: @deployment.active_lease.services %>
       <% end %>
       <% @deployment.groups.each do |group| %>
         <% group.resources.each do |resource| %>
