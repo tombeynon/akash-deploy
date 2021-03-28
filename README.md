@@ -4,6 +4,8 @@ A quick and dirty deployment UI for Akash. I built this to help the community ge
 
 This tool runs locally on your own machine using Docker. I'm looking into a hosted solution using Keplr but the need for a deployment certificate makes this more challenging to self-custody. 
 
+<img width="1357" alt="Screenshot 2021-03-28 at 04 32 34" src="https://user-images.githubusercontent.com/670623/112741543-ab72a280-8f7e-11eb-966d-67dad4aff37d.png">
+
 ## Installation
 
 You will need [Docker installed](https://docs.docker.com/get-docker) on your machine first. After that it's a simple one line command to run:
