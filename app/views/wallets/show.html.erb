@@ -15,21 +15,25 @@
   <div class="col">
     <% if @akash.wallet.exists? %>
       <h3>Certificate</h3>
-      <p>
-        <% if @akash.wallet.certificate.exists? %>
-          <% if params[:certificate].present? %>
-            <%= link_to 'Hide Certificate', wallet_path, class: 'btn btn-secondary' %>
+      <% if @akash.wallet.funded? %>
+        <p>
+          <% if @akash.wallet.certificate.exists? %>
+            <% if params[:certificate].present? %>
+              <%= link_to 'Hide Certificate', wallet_path, class: 'btn btn-secondary' %>
+            <% else %>
+              <%= link_to 'Show Certificate', wallet_path(certificate: true), class: 'btn btn-secondary' %>
+            <% end %>
+            <%= link_to 'Create new certificate', [:new, :certificate], class: 'btn btn-warning' %>
+            <%= link_to 'Revoke Certificate', certificate_path, method: :delete, data: {confirm: 'Are you sure you want to revoke and delete this certificate? A transaction will be made to remove it.'}, class: 'btn btn-danger'  %>
           <% else %>
-            <%= link_to 'Show Certificate', wallet_path(certificate: true), class: 'btn btn-secondary' %>
+            <%= link_to 'Create new certificate', [:new, :certificate], class: 'btn btn-primary' %>
           <% end %>
-          <%= link_to 'Create new certificate', [:new, :certificate], class: 'btn btn-warning' %>
-          <%= link_to 'Revoke Certificate', certificate_path, method: :delete, data: {confirm: 'Are you sure you want to revoke and delete this certificate? A transaction will be made to remove it.'}, class: 'btn btn-danger'  %>
-        <% else %>
-          <%= link_to 'Create new certificate', [:new, :certificate], class: 'btn btn-primary' %>
+        </p>
+        <% if params[:certificate].present? %>
+          <p><pre><%= @akash.wallet.certificate.to_s %></pre></p>
         <% end %>
-      </p>
-      <% if params[:certificate].present? %>
-        <p><pre><%= @akash.wallet.certificate.to_s %></pre></p>
+      <% else %>
+        <p><strong>Please fund your wallet before creating a certificate</strong></p>
       <% end %>
     <% end %>
   </div>

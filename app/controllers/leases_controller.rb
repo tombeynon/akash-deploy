@@ -1,6 +1,7 @@
 class LeasesController < ApplicationController
   before_action :require_wallet
   before_action :require_certificate, only: %i[new edit create update destroy]
+  before_action :require_funds, only: %i[new edit create update destroy]
 
   before_action :set_deployment
 

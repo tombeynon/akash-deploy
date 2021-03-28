@@ -42,6 +42,10 @@ class ApplicationController < ActionController::Base
     redirect_to new_password_path
   end
 
+  def require_funds
+    redirect_to wallet_path, flash: {alert: 'Please fund your wallet first'} unless @akash.wallet.funded?
+  end
+
   def require_wallet
     redirect_to root_path, flash: {alert: 'Wallet required'} unless @akash.wallet.exists?
   end

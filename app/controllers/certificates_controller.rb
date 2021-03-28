@@ -1,5 +1,6 @@
 class CertificatesController < ApplicationController
   before_action :require_wallet
+  before_action :require_funds, only: %i[new create destroy]
 
   def create
     if certificate_params[:content].present?

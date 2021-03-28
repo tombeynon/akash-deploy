@@ -11,6 +11,12 @@ module Akash
       address.present?
     end
 
+    def funded?
+      return false if balances.empty?
+
+      balances.find{|b| b['denom'] == 'uakt'}['amount'] >= Akash::FEE_RATE
+    end
+
     def certificate
       @certificate ||= Certificate.new(cli, key_name, address)
     end
@@ -41,10 +47,16 @@ module Akash
 
     def restore(recovery_phrase)
       input = []
-      input.push(recovery_phrase)
       if cli.keyring_exists?
-        input.push(cli.keyring_password)
-        input.push('y')
+        if exists?
+          input.push(cli.keyring_password)
+          input.push('y')
+          input.push(recovery_phrase)
+        else
+          input.push(recovery_phrase)
+          input.push(cli.keyring_password)
+          input.push('y')
+        end
       else
         input.push(cli.keyring_password)
         input.push(cli.keyring_password)
