@@ -18,6 +18,6 @@ class CertificatesController < ApplicationController
   private
 
   def certificate_params
-    params.require(:certificate).permit(:content)
+    params.fetch(:certificate, {}).permit(:content)
   end
 end

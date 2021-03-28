@@ -25,6 +25,6 @@ class WalletsController < ApplicationController
   private
 
   def wallet_params
-    params.require(:wallet).permit(:keyring_password, :recovery_phrase)
+    params.fetch(:wallet, {}).permit(:keyring_password, :recovery_phrase)
   end
 end
