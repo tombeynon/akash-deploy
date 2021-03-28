@@ -25,7 +25,10 @@ module Akash
     end
 
     def create
-      cli.run("akash tx cert create client -y --rie --from=#{key_name}", keyring: true, fees: true)
+      # work around password input not being read correctly
+      cmd = cli.build_command("akash tx cert create client -y --rie --from=#{key_name}", fees: true)
+      input = "#{cli.keyring_password}\n#{cli.keyring_password}\n"
+      cli.tty.run(cmd, input: input, pty: true)
     end
 
     def revoke

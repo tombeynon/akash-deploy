@@ -1,5 +1,6 @@
 class DeploymentsController < ApplicationController
   before_action :require_wallet
+  before_action :require_certificate, only: %i[new edit create update destroy]
 
   def index
     @deployments = @akash.deployments

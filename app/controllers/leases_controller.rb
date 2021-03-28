@@ -1,5 +1,7 @@
 class LeasesController < ApplicationController
   before_action :require_wallet
+  before_action :require_certificate, only: %i[new edit create update destroy]
+
   before_action :set_deployment
 
   def index
@@ -18,7 +20,7 @@ class LeasesController < ApplicationController
     provider = lease_params[:provider]
     @bid = @deployment.bids.find(provider)
     if @bid && @deployment.leases.create(bid: @bid)
-      redirect_to deployment_lease_path(@deployment.dseq, @lease.provider), flash: { notice: 'Lease created' }
+      redirect_to deployment_lease_path(@deployment.dseq, provider), flash: { notice: 'Lease created' }
     else
       error = 'Provider is required' unless @bid
       # improve errors

@@ -91,7 +91,7 @@ module Akash
     def status_data
       return {} unless wallet.certificate.exists?
 
-      @status_data ||= cli.cmd_json("akash provider lease-status --from #{wallet.key_name} --dseq #{dseq} --oseq #{oseq} --gseq #{gseq} --provider #{provider}", node: true, keyring: true)
+      @status_data ||= cli.cmd_json("akash provider lease-status --from #{wallet.key_name} --dseq #{dseq} --oseq #{oseq} --gseq #{gseq} --provider #{provider}", node: true, keyring: true) || {}
     end
   end
 end

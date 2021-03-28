@@ -47,15 +47,14 @@ module Akash
       out.strip
     end
 
-    def run(command, input: [], keyring: false, **args)
-      input.unshift(keyring_password) if keyring
+    def run(command, input: [], keyring: false, fees: false, **args)
+      input.unshift(keyring_password) if keyring || fees
       in_stream = StringIO.new
       input.each { |i| in_stream.puts i }
       in_stream.rewind
-      tty.run(build_command(command, keyring: keyring, **args), in: in_stream, pty: true)
+      command = build_command(command, keyring: keyring, fees: fees, **args)
+      tty.run(command, in: in_stream, pty: true)
     end
-
-    private
 
     def build_command(command, keyring: false, node: false, fees: false)
       parts = [command]

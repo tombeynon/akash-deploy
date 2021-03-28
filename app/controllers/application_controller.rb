@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
+  before_action :set_akash
   before_action :require_keyring_password
   after_action :extend_keyring_password, if: :keyring_password?
-  before_action :set_akash
 
   private
 
@@ -43,7 +43,11 @@ class ApplicationController < ActionController::Base
   end
 
   def require_wallet
-    redirect_to root_path unless @akash.wallet.exists?
+    redirect_to root_path, flash: {alert: 'Wallet required'} unless @akash.wallet.exists?
+  end
+
+  def require_certificate
+    redirect_to wallet_path, flash: {alert: 'Certificate required'} unless @akash.wallet.certificate.exists?
   end
 
   def set_akash

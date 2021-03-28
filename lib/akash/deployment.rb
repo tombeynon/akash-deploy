@@ -39,6 +39,8 @@ module Akash
     end
 
     def manifest_active?
+      return false unless active_lease?
+
       active_lease.manifest_active?
     end
 

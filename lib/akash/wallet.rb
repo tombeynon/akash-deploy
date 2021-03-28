@@ -40,12 +40,11 @@ module Akash
 
     def restore(recovery_phrase)
       input = []
+      input.push(recovery_phrase)
       if cli.keyring_exists?
         input.push(cli.keyring_password)
         input.push('y')
-        input.push(recovery_phrase)
       else
-        input.push(recovery_phrase)
         input.push(cli.keyring_password)
         input.push(cli.keyring_password)
       end
@@ -55,8 +54,8 @@ module Akash
 
     def delete
       input = []
-      input.push('y')
-      cli.run("akash keys delete #{key_name}", input: input, keyring: true)
+      input.push(cli.keyring_password)
+      cli.run("akash keys delete #{key_name} -y --keyring-backend file", input: input)
     end
   end
 end
