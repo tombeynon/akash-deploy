@@ -11,6 +11,8 @@ Once you've [got the tool running](#installation), it will direct you through th
 ## Roadmap
 
 - ~~Container logs~~
+- Better walkthrough of deployment (e.g. submit manifest)
+- Funding an existing escrow account
 - Manifest builder UI
 - Local currency pricing and forecasts
 - Better fee handling
@@ -46,6 +48,8 @@ To update to the latest version, just pull the latest docker image:
 ```
 docker pull tombeynon/akash-deploy
 ```
+
+You will need to restart the container after updating (CTRL-C to quit)
 
 ### Using an existing Akash keyfile and certificate
 
