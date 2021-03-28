@@ -6,6 +6,8 @@ This tool runs locally on your own machine using Docker. I'm looking into a host
 
 <img width="1357" alt="Screenshot 2021-03-28 at 04 32 34" src="https://user-images.githubusercontent.com/670623/112741543-ab72a280-8f7e-11eb-966d-67dad4aff37d.png">
 
+Once you've got the tool running, it should direct you through the process of deploying to some extent. You should also [check out the Examples wiki](https://github.com/tombeynon/akash-deploy/wiki/Examples) for some ideas.
+
 ## Installation
 
 You will need [Docker installed](https://docs.docker.com/get-docker) on your machine first. After that it's a simple one line command to run:
