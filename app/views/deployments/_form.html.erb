@@ -1,7 +1,7 @@
 <%= form_for :deployment, url: @deployment.persisted? ? deployment_path(@deployment.dseq) : deployments_path, method: @deployment.persisted? ? :patch : :post do |f| %>
   <div class="form-group">
     <%= f.label :manifest_content do %>
-      Manifest (<%= link_to 'example', 'https://github.com/tombeynon/akash-hello-world/blob/master/deploy.yml' %>)
+      Manifest (<%= link_to 'examples', 'https://github.com/tombeynon/akash-deploy/wiki/Examples', target: :blank %>)
     <% end %>
     <%= f.text_area :manifest_content, class: 'form-control', rows: 20 %><br />
   </div>
