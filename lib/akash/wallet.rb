@@ -14,7 +14,12 @@ module Akash
     def funded?
       return false if balances.empty?
 
-      balances.find{|b| b['denom'] == 'uakt'}['amount'] >= Akash::FEE_RATE
+      balance('uakt') >= Akash.fee_rate_uakt
+    end
+
+    def balance(denom)
+      data = balances.find{ |b| b['denom'] == denom } || {}
+      data['amount'] ? data['amount'].to_i : 0
     end
 
     def certificate
@@ -31,7 +36,7 @@ module Akash
     def balances
       return unless exists?
 
-      cli.cmd_json("akash query bank balances #{address} -o json", node: true)['balances']
+      @balances ||= cli.cmd_json("akash query bank balances #{address} -o json", node: true)['balances']
     end
 
     def create
