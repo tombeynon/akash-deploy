@@ -1,7 +1,6 @@
 module Akash
   class Deployments
     attr_reader :cli, :wallet
-    delegate :each, to: :deployments
 
     def initialize(cli, wallet)
       @cli = cli
@@ -9,7 +8,7 @@ module Akash
     end
 
     def find(id)
-      deployments.find { |d| d.dseq == id }
+      get_deployments(dseq: id).first
     end
 
     def new(data = {})
@@ -23,24 +22,27 @@ module Akash
     end
 
     def active
-      deployments.find_all { |d| d.active? }
+      @active ||= get_deployments(state: 'active')
     end
 
     def closed
-      deployments.find_all { |d| !d.active? }
+      @closed ||= get_deployments(state: 'closed')
     end
 
-    def deployments
-      @deployments ||= (data['deployments'] || []).reverse.map do |deploy|
-        new(deploy)
-      end
+    def all
+      @all ||= get_deployments
     end
-    alias_method :all, :deployments
 
-    def data
+    def get_deployments(state: nil, dseq: nil)
       return {} unless wallet.exists?
 
-      @data ||= cli.cmd_json("akash query deployment list --owner #{wallet.address} -o json", node: true)
+      flags = []
+      flags << "--state #{state}" if state
+      flags << "--dseq #{dseq}" if dseq
+      data = cli.cmd_json("akash query deployment list --owner #{wallet.address} #{flags.join(' ')} -o json", node: true)
+      (data['deployments'] || []).reverse.map do |deploy|
+        new(deploy)
+      end
     end
 
     private

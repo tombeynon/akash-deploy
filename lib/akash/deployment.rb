@@ -35,6 +35,8 @@ module Akash
     end
 
     def active_lease?
+      return false unless active?
+
       active_lease.present?
     end
 
