@@ -21,6 +21,8 @@ module Akash
     end
 
     def rpc_node
+      return ENV['RPC_NODE'] if ENV['RPC_NODE'].present?
+
       @rpc_node ||= tty.run("curl -s #{network_url}/rpc-nodes.txt | sort -R | head -1").out.strip
     end
 
