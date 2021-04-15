@@ -69,6 +69,8 @@ You can pass the following environment variables to the application via `docker 
 
 `AKASH_HOME=/root/akash` - the Akash home directory inside the container
 
+`RPC_NODE=http://127.0.0.1:80` - sets the RPC node (defaults to a random entry from [overclk/net](https://github.com/ovrclk/net/blob/master/mainnet/rpc-nodes.txt))
+
 `KEY_NAME=deploy` - the key name used for the wallet
 
 `FEE_RATE=5000uakt` - fee rate for all transactions
