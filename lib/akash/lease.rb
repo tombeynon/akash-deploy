@@ -101,13 +101,15 @@ module Akash
     end
 
     def logs_data
-      @logs_data ||= cli.cmd("akash provider lease-logs --from #{wallet.key_name} --dseq #{dseq} --oseq #{oseq} --gseq #{gseq} --provider #{provider}", node: true, keyring: true)
+      @logs_data ||= cli.cmd("akash provider lease-logs -t 1000 --from #{wallet.key_name} --dseq #{dseq} --oseq #{oseq} --gseq #{gseq} --provider #{provider}", node: true, keyring: true)
     end
 
     def status_data
       return {} unless wallet.certificate.exists?
 
       @status_data ||= cli.cmd_json("akash provider lease-status --from #{wallet.key_name} --dseq #{dseq} --oseq #{oseq} --gseq #{gseq} --provider #{provider}", node: true, keyring: true) || {}
+    rescue TTY::Command::ExitError
+      {}
     end
   end
 end
