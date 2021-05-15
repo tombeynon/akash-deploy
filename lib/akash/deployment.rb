@@ -75,6 +75,13 @@ module Akash
       File.join(cli.home_directory, "#{dseq}.yml")
     end
 
+    def fund(amount_uakt = 10_000)
+      result = cli.run("akash tx deployment deposit #{amount_uakt}uakt --dseq #{dseq} -y --from #{wallet.key_name}", fees: true)
+      result.success?
+    rescue TTY::Command::ExitError
+      false
+    end
+
     def update(content: nil, file: nil)
       path = file&.path || File.join(cli.home_directory, "#{dseq}.yml")
       File.write(path, content) if content.present?

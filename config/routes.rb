@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resource :wallet, only: %i[show new create destroy]
   resource :certificate, only: %i[new create destroy]
   resources :deployments do
+    resources :funds, only: [:new, :create]
     resources :bids, only: [:index]
     resources :leases do
       resource :logs, only: [:show]

@@ -33,16 +33,30 @@
         <%= render "deployments/service_status", services: @lease.services %>
       <% end %>
     </table>
-    <p>
+    <div class="btn-group">
       <%= link_to 'Back', deployment_leases_path(@deployment.dseq), class: 'btn' %>
-      <%= link_to 'View logs', deployment_lease_logs_path(@deployment.dseq, @lease.provider), class: 'btn btn-primary' %>
-      <% unless @lease.closed? %>
-        <% if @deployment.manifest_exists? %>
-          <%= link_to 'Send manifest', deployment_lease_path(@deployment.dseq, @lease.provider), method: :patch, data: { confirm: 'Are you sure you want to submit the current manifest to the provider?' }, class: 'btn btn-primary' %>
-        <% end %>
-        <%= link_to 'Close lease', deployment_lease_path(@deployment.dseq, @lease.provider), method: :delete, data: { confirm: 'Are you sure you want to close this lease?' }, class: 'btn btn-danger' %>
-      <% end %>
-    </p>
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          Actions
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li>
+            <%= link_to 'View logs', deployment_lease_logs_path(@deployment.dseq, @lease.provider), class: 'dropdown-item' %>
+          </li>
+          <% unless @lease.closed? %>
+            <% if @deployment.manifest_exists? %>
+              <li>
+                <%= link_to 'Send manifest', deployment_lease_path(@deployment.dseq, @lease.provider), method: :patch, data: { confirm: 'Are you sure you want to submit the current manifest to the provider?' }, class: 'dropdown-item' %>
+              </li>
+            <% end %>
+            <li>
+              <%= link_to 'Close lease', deployment_lease_path(@deployment.dseq, @lease.provider), method: :delete, data: { confirm: 'Are you sure you want to close this lease?' }, class: 'dropdown-item' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="col">
     <% if @lease.manifest_active? %>

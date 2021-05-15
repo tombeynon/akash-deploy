@@ -21,7 +21,7 @@ class LeasesController < ApplicationController
     provider = lease_params[:provider]
     @bid = @deployment.bids.find(provider)
     if @bid && @deployment.leases.create(bid: @bid)
-      redirect_to deployment_lease_path(@deployment.dseq, provider), flash: { notice: 'Lease created' }
+      redirect_to deployment_lease_path(@deployment.dseq, provider), flash: { notice: 'Lease created - you should now send your manifest to the provider' }
     else
       error = 'Provider is required' unless @bid
       # improve errors

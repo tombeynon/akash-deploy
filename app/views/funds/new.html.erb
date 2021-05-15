@@ -1,0 +1,19 @@
+<h1 class="display-4 mb-4">Fund Deployment #<%= params[:deployment_id] %></h1>
+<div class="row">
+  <div class="col">
+    <p>Enter the amount you would like to deposit in uakt</p>
+
+    <%= form_for :fund, url: deployment_funds_path(@deployment.dseq), method: :post do |f| %>
+      <div class="form-group">
+        <%= f.label :deposit_amount do %>
+          Deposit amount
+        <% end %>
+        <%= f.text_field :deposit_amount, class: 'form-control', placeholder: '10000uakt' %><br />
+      </div>
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+      <%= link_to 'Back', deployment_path(@deployment.dseq), class: 'btn' %>
+    <% end %>
+  </div>
+  <div class="col">
+  </div>
+</div>

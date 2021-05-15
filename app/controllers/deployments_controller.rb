@@ -67,6 +67,6 @@ class DeploymentsController < ApplicationController
   end
 
   def deployment_params
-    params.require(:deployment).permit(:manifest_content)
+    params.require(:deployment).permit(:manifest_content, :deploy_amount)
   end
 end
