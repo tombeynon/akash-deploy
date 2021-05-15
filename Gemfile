@@ -34,7 +34,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'tty-command'
 
 gem 'jquery-rails'
-gem 'bootstrap', '~> 5.0.0.beta2'
 gem 'font-awesome-rails'
 
 group :development, :test do
