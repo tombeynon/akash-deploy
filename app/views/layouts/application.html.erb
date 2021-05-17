@@ -23,22 +23,19 @@
     <![endif]-->
   </head>
   <body>
-    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm">
+    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
       <p class="h5 my-0 me-md-auto fw-normal">
-        <%= link_to 'Akash Deploy UI', root_path, class: 'text-reset text-decoration-none' %>
-      </p>
-      <p class="my-0 me-md-auto fw-normal">
-        <%= @akash.wallet.exists? ? @akash.wallet.address : '' %>
+      <%= image_tag("akash-logo.jpg", width: 200) %>
       </p>
       <% if keyring_password? %>
         <nav class="my-2 my-md-0 me-md-3">
-          <%= link_to 'Home', root_path, class: 'p-2 text-dark' %>
-          <%= link_to 'Wallet', wallet_path, class: 'p-2 text-dark' %>
+          <%= link_to 'Home', root_path, class: 'p-2 text-light' %>
+          <%= link_to 'Wallet', wallet_path, class: 'p-2 text-light' %>
           <% if @akash.wallet.exists? %>
-            <%= link_to 'Deployments', deployments_path, class: 'p-2 text-dark' %>
+            <%= link_to 'Deployments', deployments_path, class: 'p-2 text-light' %>
           <% end %>
-          <%= link_to 'Close wallet', password_path, method: :delete, class: 'p-2 text-dark' %>
-          <%= fa_icon "refresh", class: 'p-2', onclick: 'Turbolinks.visit(window.location)', style: 'cursor: pointer' %>
+          <%= link_to 'Close wallet', password_path, method: :delete, class: 'p-2 text-light' %>
+          <%= fa_icon "refresh", class: 'p-2 icon-cog', onclick: 'Turbolinks.visit(window.location)', style: 'cursor: pointer' %>
         </nav>
       <% end %>
       <%# <a class="btn btn-outline-primary" href="#">Sign up</a> %>

@@ -13,7 +13,7 @@ RUN curl https://raw.githubusercontent.com/ovrclk/akash/master/godownloader.sh |
 ENV AKASH_NET=mainnet
 ENV AKASH_HOME=/root/akash
 ENV KEY_NAME=deploy
-ENV FEE_RATE=5000uakt
+ENV FEE_RATE=200uakt
 
 WORKDIR /app
 COPY Gemfile /app/Gemfile

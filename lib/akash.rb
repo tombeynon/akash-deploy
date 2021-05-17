@@ -1,5 +1,5 @@
 module Akash
-  FEE_RATE = ENV['FEE_RATE'] || '5000uakt'
+  FEE_RATE = ENV['FEE_RATE'] || '200uakt'
   ESCROW_AMOUNT = '5000000uakt'.freeze
 
   def self.fee_rate_uakt
