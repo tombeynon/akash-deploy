@@ -34,8 +34,9 @@
           <% if @akash.wallet.exists? %>
             <%= link_to 'Deployments', deployments_path, class: 'p-2 text-light' %>
           <% end %>
+          <%= link_to 'Market', "ticker/ticker", class: 'p-2 text-light' %>
+          <%= link_to 'Keplr', "keplr/keplr", class: 'p-2 text-light' %>
           <%= link_to 'Close wallet', password_path, method: :delete, class: 'p-2 text-light' %>
-          <%= fa_icon "refresh", class: 'p-2 icon-cog', onclick: 'Turbolinks.visit(window.location)', style: 'cursor: pointer' %>
         </nav>
       <% end %>
       <%# <a class="btn btn-outline-primary" href="#">Sign up</a> %>
