@@ -11,8 +11,8 @@ Once you've [got the tool running](#installation), it will direct you through th
 ## Roadmap
 
 - ~~Container logs~~
+- ~~Funding an existing escrow account~~
 - Better walkthrough of deployment (e.g. submit manifest)
-- Funding an existing escrow account
 - Manifest builder UI
 - Local currency pricing and forecasts
 - Better fee handling
