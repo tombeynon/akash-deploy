@@ -1,5 +1,7 @@
 {
   "name": "akash-deploy",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "cors-anywhere": "^0.4.4"
+  }
 }
