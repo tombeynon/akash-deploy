@@ -15,8 +15,6 @@ ENV AKASH_HOME=/root/akash
 ENV KEY_NAME=deploy
 ENV FEE_RATE=200uakt
 
-EXPOSE 3002
-
 WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
