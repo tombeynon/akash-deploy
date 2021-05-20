@@ -34,8 +34,8 @@
           <% if @akash.wallet.exists? %>
             <%= link_to 'Deployments', deployments_path, class: 'p-2 text-light' %>
           <% end %>
-          <%= link_to 'Market', "ticker/ticker", class: 'p-2 text-light' %>
-          <%= link_to 'Keplr', "keplr/keplr", class: 'p-2 text-light' %>
+          <%= link_to 'Market', "market", class: 'p-2 text-light' %>
+          <%= link_to 'Top up', "transfer", class: 'p-2 text-light' %>
           <%= link_to 'Close wallet', password_path, method: :delete, class: 'p-2 text-light' %>
         </nav>
       <% end %>

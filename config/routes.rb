@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   resource :password, only: %i[new create destroy]
   resource :wallet, only: %i[show new create destroy]
   resource :certificate, only: %i[new create destroy]
-  get 'tickers/akash'
-  get 'keplr/transfer'
+  get '/market', to: 'tickers#akash', as: 'market'
+  get '/transfer', to: 'keplr#transfer', as: 'transfer'
+  resource :ticker, only: %i[akash]
+  resource :keplr, only: %i[transfer]
   resources :deployments do
     resources :funds, only: [:new, :create]
     resources :bids, only: [:index]

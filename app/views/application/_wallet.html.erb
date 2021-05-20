@@ -1,4 +1,4 @@
-<p>Address: <%= wallet.address %></p>
+<p>Address: <span id="deployaddress"><%= wallet.address %></span></p>
 <p>
   Balance:
   <% if wallet.balances.empty? %>
@@ -9,10 +9,7 @@
     <% end %>
   <% end %>
 </p>
-<p>Keplr Address: <span id="keplraddress">none</span></p>
-<p>Keplr Balance: <span id="keplrbalance">0</span></p>
+<p>Keplr Address: <span id="keplraddress"></span></p>
+<p>Keplr Balance: <span id="keplrbalance"></span></p>
+<button onClick="startup()" class="btn btn-primary">Keplr Login</button>
 
-<% if false %>
-<input id="topupvalue" value="amount"/>
-<button id="topup" onClick=send(amount, receivingaddress)
-<% end %> 

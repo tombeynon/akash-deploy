@@ -1,0 +1,19 @@
+<h1 class="display-4 mb-4">Top Up Akash Deploy</h1>
+<div class="row">
+  <div class="col">
+    <div>
+        <label for="amount">Amount</label>
+        <div class="input-group">
+            <input class="form-control" id="amount" name="amount">
+            <div class="input-group-append">
+                <div class="input-group-text">UAKT</div>
+            </div>
+        </div>
+    <button onClick="sendform()" class="btn btn-primary">Top Up</button>
+	</div>
+  </div>
+  <div class="col">
+    <%= render "wallet", wallet: @akash.wallet %>
+  </div>
+</div>
+

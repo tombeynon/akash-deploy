@@ -1,6 +1,6 @@
 # placeholder for transfering token from akash deploy to keplr :)
 module Akash
-  class Wallet
+  class Send
     attr_reader :cli, :key_name, :receiver_key
 
     def initialize(cli, key_name, receiver_key)
@@ -12,7 +12,7 @@ module Akash
     def send(amount):
       input = []
       input.push(cli.keyring_password)
-      cli.run("akash tx send receiver_key #{amount}uakt -y --keyring-backend file", input: input)
+      cli.run("akash tx send #{key_name} #{receiver_key} #{amount}uakt -y --keyring-backend file", input: input)
     end
 
   end
