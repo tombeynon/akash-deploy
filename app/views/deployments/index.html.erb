@@ -32,7 +32,44 @@
               <%= "#{format_balance(deployment.escrow.balance)}" %>
               <%= "(#{format_balance(deployment.escrow.transferred)} spent)" %>
             </td>
-            <td><%= link_to 'View', deployment_path(deployment.dseq) %></td>
+            <td>
+              <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  Actions
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li>
+                    <%= link_to 'View', deployment_path(deployment.dseq), class: 'dropdown-item' %>
+                  </li>
+                  <li>
+                    <%= link_to 'View bids', deployment_bids_path(deployment.dseq), class: 'dropdown-item' %>
+                  </li>
+                  <li>
+                    <%= link_to 'View leases', deployment_leases_path(deployment.dseq), class: 'dropdown-item' %>
+                  </li>
+                  <li>
+                    <%= link_to 'Add funds', new_deployment_fund_path(deployment.dseq), class: 'dropdown-item' %>
+                  </li>
+                  <li>
+                    <%= link_to 'Update manifest', edit_deployment_path(deployment.dseq), class: 'dropdown-item' %>
+                  </li>
+                  <% if deployment.active_lease? %>
+                    <% if deployment.manifest_exists? %>
+                      <li>
+                        <%= link_to 'Send manifest', deployment_lease_path(deployment.dseq, deployment.active_lease.provider), method: :patch, data: { confirm: 'Are you sure you want to submit the current manifest to the provider?' }, class: 'dropdown-item' %>
+                      </li>
+                    <% end %>
+                    <li>
+                      <%= link_to 'View logs', deployment_lease_logs_path(deployment.dseq, deployment.active_lease.provider), class: 'dropdown-item' %>
+                    </li>
+                  <% end %>
+                  <li>
+                    <%= link_to 'Close deployment', deployment_path(deployment.dseq), method: :delete, data: {confirm: 'Are you sure you want to close this deployment?'}, class: 'dropdown-item' %>
+                  </li>
+                </ul>
+              </div>
+            </td>
           </tr>
         <% end %>
       </table>

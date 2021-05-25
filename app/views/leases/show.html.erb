@@ -45,6 +45,9 @@
             <%= link_to 'View logs', deployment_lease_logs_path(@deployment.dseq, @lease.provider), class: 'dropdown-item' %>
           </li>
           <% unless @lease.closed? %>
+            <li>
+              <%= link_to 'Update manifest', edit_deployment_path(@deployment.dseq), class: 'dropdown-item' %>
+            </li>
             <% if @deployment.manifest_exists? %>
               <li>
                 <%= link_to 'Send manifest', deployment_lease_path(@deployment.dseq, @lease.provider), method: :patch, data: { confirm: 'Are you sure you want to submit the current manifest to the provider?' }, class: 'dropdown-item' %>
