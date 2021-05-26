@@ -78,7 +78,16 @@ module Akash
       return [] unless status_data['services']
 
       status_data['services'].map do |key, data|
-        Service.new(key, data)
+        port_data = status_data['forwarded_ports'][key] || []
+        Service.new(key, data, port_data)
+      end
+    end
+
+    def ports
+      return [] unless status_data['forwarded_ports']
+
+      status_data['forwarded_ports'].map do |key, data|
+
       end
     end
 
