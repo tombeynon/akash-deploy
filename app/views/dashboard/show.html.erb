@@ -38,6 +38,7 @@
       <% else %>
         <p>No Deployments</p>
       <% end %>
+      <p><%= link_to 'Create new', [:new, :deployment], class: 'btn btn-primary pull-right' %></p>
     </div>
   <% end %>
 </div>
