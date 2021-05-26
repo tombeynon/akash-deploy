@@ -67,6 +67,11 @@ module Akash
       active_lease.uris
     end
 
+    def ports
+      return [] unless active_lease?
+      active_lease.ports
+    end
+
     def manifest_content
       File.read(manifest_path) if manifest_exists?
     end

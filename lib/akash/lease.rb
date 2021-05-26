@@ -68,6 +68,10 @@ module Akash
       services.map(&:uris).flatten
     end
 
+    def ports
+      services.map(&:ports).flatten
+    end
+
     def logs
       return '' unless logs_data
 
@@ -80,14 +84,6 @@ module Akash
       status_data['services'].map do |key, data|
         port_data = status_data['forwarded_ports'][key] || []
         Service.new(key, data, port_data)
-      end
-    end
-
-    def ports
-      return [] unless status_data['forwarded_ports']
-
-      status_data['forwarded_ports'].map do |key, data|
-
       end
     end
 
