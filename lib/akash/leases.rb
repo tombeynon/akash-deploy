@@ -13,7 +13,7 @@ module Akash
       leases.find { |l| l.provider == id }
     end
 
-    def create(bid: bid)
+    def create(bid:)
       result = cli.run("akash tx market lease create -y --from #{wallet.key_name} --owner #{wallet.address} --dseq #{bid.dseq} --oseq #{bid.oseq} --gseq #{bid.gseq} --provider #{bid.provider}", fees: true)
       result.success?
     rescue TTY::Command::ExitError

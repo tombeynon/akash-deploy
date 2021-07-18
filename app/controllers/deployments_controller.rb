@@ -45,7 +45,7 @@ class DeploymentsController < ApplicationController
       error = 'Please enter your manifest content (deploy.yml)' unless manifest_content.present?
       # improve errors
       error ||= 'Something went wrong (check docker output)'
-      redirect_to new_deployment_path, flash: { error: error }
+      redirect_to edit_deployment_path(@deployment.dseq), flash: { error: error }
     end
   end
 
