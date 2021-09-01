@@ -4,7 +4,7 @@ RUN pacman -Syyu --noconfirm ruby yarn npm
 ENV PATH $PATH:/root/.local/share/gem/ruby/3.0.0/bin 
 
 
-RUN gem update --system --quiet && gem install bundler 
+RUN gem update && gem install bundler 
 
 # Install Akash, `stable` version is also available
 ENV AKASH_CLI_VERSION=v0.12.1
