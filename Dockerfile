@@ -1,5 +1,5 @@
 FROM faddat/archlinux
-RUN pacman -Syyu --noconfirm ruby yarn npm
+RUN pacman -Syyu --noconfirm ruby yarn npm curl
 
 ENV PATH $PATH:/root/.local/share/gem/ruby/3.0.0/bin 
 
