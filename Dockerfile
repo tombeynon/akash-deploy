@@ -1,10 +1,10 @@
 FROM faddat/archlinux
 RUN pacman -Syyu --noconfirm ruby yarn npm
+
 ENV PATH $PATH:/root/.local/share/gem/ruby/3.0.0/bin 
 
 
-ENV BUNDLER_VERSION 2.2.15
-RUN gem update --system --quiet && gem install bundler -v "$BUNDLER_VERSION"
+RUN gem update --system --quiet && gem install bundler 
 
 # Install Akash, `stable` version is also available
 ENV AKASH_CLI_VERSION=v0.12.1
