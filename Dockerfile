@@ -1,5 +1,5 @@
 FROM faddat/archlinux
-RUN pacman -Syyu ruby yarn nmp
+RUN pacman -Syyu --noconfirm ruby yarn npm
 
 ENV BUNDLER_VERSION 2.2.15
 RUN gem update --system --quiet && gem install bundler -v "$BUNDLER_VERSION"
