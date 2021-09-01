@@ -1,5 +1,5 @@
-FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y nodejs
+FROM faddat/archlinux
+RUN pacman -Syyu ruby nodejs
 
 ENV BUNDLER_VERSION 2.2.15
 RUN gem update --system --quiet && gem install bundler -v "$BUNDLER_VERSION"
