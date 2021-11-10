@@ -5,7 +5,7 @@ ENV BUNDLER_VERSION 2.2.15
 RUN gem update --system --quiet && gem install bundler -v "$BUNDLER_VERSION"
 
 # Install Akash, `stable` version is also available
-ENV AKASH_CLI_VERSION=v0.12.1
+ARG AKASH_CLI_VERSION=v0.14.0
 WORKDIR /usr
 RUN curl https://raw.githubusercontent.com/ovrclk/akash/master/godownloader.sh | sh -s -- "$AKASH_CLI_VERSION"
 
